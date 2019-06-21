@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 #installing MySQL
-#sudo yum update -y
+sudo yum install wget firewalld -y
+sudo systemctl start firewalld
+sudo systemctl enable firewalld
+sudo systemctl status firewalld
 sudo yum install -y wget
 sudo yum install java-1.8.0-openjdk.x86_64 -y
 wget -q --no-cookies -S "http://archive.apache.org/dist/tomcat/tomcat-9/v9.0.16/bin/apache-tomcat-9.0.16.tar.gz"
@@ -32,4 +35,8 @@ WantedBy=multi-user.target
 EOF
 sudo systemctl daemon-reload
 sudo systemctl start tomcat
+sudo systemctl enable tomcat
+sudo systemctl status tomcat
+sudo firewall-cmd --permanent --zone=public --add-port=8080/tcp
+sudo firewall-cmd --reload
 
