@@ -7,3 +7,9 @@
 | Aditi Jalkote| 001404314 | jalkote.a@husky.neu.edu |
 | Akash Katakam| 001400025 | katakam.a@husky.neu.edu |
 | Tanmayee Kalluri| 001400957 | kalluri.t@husky.neu.edu |
+
+## Validate Template
+packer validate amazon_ami.json 
+
+##Build AMI
+packer build amazon_ami.json
