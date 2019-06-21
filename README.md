@@ -11,5 +11,5 @@
 ## Validate Template
 packer validate amazon_ami.json 
 
-##Build AMI
+## Build AMI
 packer build amazon_ami.json
