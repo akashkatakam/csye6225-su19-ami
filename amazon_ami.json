@@ -31,6 +31,12 @@
         }
     ],
     "provisioners": [
-        
+        {
+            "type": "shell",
+            "environment_vars": [
+                "JAVA_HOME=lib/jvm/java-1.8.0-openjdk"
+            ],
+            "script":"instance_setup.sh"
+        }
     ]
 }
