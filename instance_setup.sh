@@ -3,18 +3,15 @@
 #sudo yum update -y
 sudo yum install -y wget
 sudo yum install java-1.8.0-openjdk.x86_64 -y
-sudo yum localinstall https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
-sudo yum install mysql-server
-sudo systemctl enable mysqld
-sudo systemctl start mysqld
 wget -q --no-cookies -S "http://archive.apache.org/dist/tomcat/tomcat-9/v9.0.16/bin/apache-tomcat-9.0.16.tar.gz"
 tar -xf apache-tomcat-9.0.16.tar.gz
 sudo mv apache-tomcat-9.0.16/ /opt/tomcat/
 echo "export CATALINA_HOME='/opt/tomcat/'" >> ~/.bashrc
 source ~/.bashrc
 sudo useradd -r tomcat --shell /bin/false
-sudo chown -R tomcat:tomcat /opt/tomcat/
-sudo cat > /etc/systemd/system/tomcat.service << EOF
+cd /opt && sudo chown -R tomcat tomcat/
+sudo sh -c 'chmod +x /opt/tomcat/bin/*.sh'
+cat << EOF | sudo tee -a /etc/systemd/system/tomcat.service
 [Unit]
 Description=Apache Tomcat 9
 After=syslog.target network.target
