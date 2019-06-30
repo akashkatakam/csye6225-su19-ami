@@ -51,4 +51,3 @@ sudo ./install auto
 # If code deploy aget is not running then start the service first
 # sudo service codedeploy-agent start
 sudo service codedeploy-agent status
-
