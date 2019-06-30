@@ -5,6 +5,7 @@ sudo systemctl start firewalld
 sudo systemctl enable firewalld
 sudo systemctl status firewalld
 sudo yum install -y wget
+sudo yum install ruby
 sudo yum install java-1.8.0-openjdk.x86_64 -y
 wget -q --no-cookies -S "http://archive.apache.org/dist/tomcat/tomcat-9/v9.0.16/bin/apache-tomcat-9.0.16.tar.gz"
 tar -xf apache-tomcat-9.0.16.tar.gz
@@ -33,10 +34,11 @@ Restart=on-failure
 [Install]
 WantedBy=multi-user.target
 EOF
-sudo systemctl daemon-reload
-sudo systemctl start tomcat
-sudo systemctl enable tomcat
-sudo systemctl status tomcat
 sudo firewall-cmd --permanent --zone=public --add-port=8080/tcp
 sudo firewall-cmd --reload
-
+cd /home/centos
+wget https://code-deploy.csye6225-su19-katakama.me.s3.us-east-1.amazonaws.com/latest/install
+chmod +x ./install
+sudo ./install auto
+sudo service codedeploy-agent start
+sudo service codedeploy-agent status
