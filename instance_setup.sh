@@ -40,6 +40,7 @@ sudo systemctl status tomcat
 sudo firewall-cmd --permanent --zone=public --add-port=8080/tcp
 sudo firewall-cmd --reload
 
+echo "Creating code deploy agent in the AMI"
 sudo yum update
 sudo yum install ruby
 sudo yum install wget
