@@ -9,7 +9,7 @@ jobs:
       - run:
           name: Install packages
           command: sudo apt-get update && sudo apt-get install wget zip unzip -y
-      -run:
+      - run:
           name: Install pip
           command: sudo curl -O https://bootstrap.pypa.io/get-pip.py && sudo python3 get-pip.py --user
       - run:
@@ -28,5 +28,4 @@ jobs:
           name: Build AMI
           command: |
             ./packer build \
-            -var "subnet_id=${AWS_SUBNET_ID}" \
             amazon_ami.json
