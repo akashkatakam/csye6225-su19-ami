@@ -28,4 +28,5 @@ jobs:
           name: Build AMI
           command: |
             ./packer build \
+            -var "aws_region=${AWS_REGION}" \
             amazon_ami.json
