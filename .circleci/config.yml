@@ -1,4 +1,3 @@
-#config file for AMI
 version: 2
 jobs:
   build:

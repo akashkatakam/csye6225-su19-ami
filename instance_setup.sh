@@ -41,9 +41,7 @@ sudo firewall-cmd --permanent --zone=public --add-port=8080/tcp
 sudo firewall-cmd --reload
 
 echo "Creating code deploy agent in the AMI"
-sudo yum update
 sudo yum install ruby -y
-sudo yum install wget
 cd /home/centos
 wget https://aws-codedeploy-us-east-1.s3.amazonaws.com/latest/install
 chmod +x ./install
