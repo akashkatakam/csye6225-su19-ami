@@ -3,15 +3,18 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:2.7-jessie
+      - image: circleci/python:3.6-jessie
     steps:
       - checkout
       - run:
           name: Install packages
           command: sudo apt-get update && sudo apt-get install wget zip unzip -y
+      -run:
+          name: Install pip
+          command: sudo curl -O https://bootstrap.pypa.io/get-pip.py && sudo python3 get-pip.py --user
       - run:
           name: Install awscli
-          command: sudo pip install awscli
+          command: sudo pip3 install awscli --upgrade --user
       - run:
           name: Download packer
           command: |
@@ -25,6 +28,5 @@ jobs:
           name: Build AMI
           command: |
             ./packer build \
-            -var "aws_region=${AWS_REGION}" \
             -var "subnet_id=${AWS_SUBNET_ID}" \
             amazon_ami.json

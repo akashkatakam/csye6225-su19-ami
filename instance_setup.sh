@@ -42,11 +42,10 @@ sudo firewall-cmd --reload
 
 echo "Creating code deploy agent in the AMI"
 sudo yum update
-sudo yum install ruby
+sudo yum install ruby -y
 sudo yum install wget
 cd /home/centos
-#ToDo:remove hardcode value domain name
-wget https://code-deploy.csye6225-su19-jalkotea.me.s3.us-east-1.amazonaws.com/latest/install
+wget https://aws-codedeploy-us-east-1.s3.amazonaws.com/latest/install
 chmod +x ./install
 sudo ./install auto
 # If code deploy aget is not running then start the service first
