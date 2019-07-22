@@ -49,3 +49,10 @@ sudo ./install auto
 # If code deploy aget is not running then start the service first
 # sudo service codedeploy-agent start
 sudo service codedeploy-agent status
+
+echo "Installing cloud watch agent in the AMI"
+wget https://s3.amazonaws.com/amazoncloudwatch-agent/centos/amd64/latest/amazon-cloudwatch-agent.rpm
+sudo rpm -U ./amazon-cloudwatch-agent.rpm
+sudo systemctl status amazon-cloudwatch-agent
+sudo systemctl start amazon-cloudwatch-agent
+sudo systemctl status amazon-cloudwatch-agent
