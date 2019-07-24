@@ -57,9 +57,3 @@ sudo systemctl status amazon-cloudwatch-agent
 sudo systemctl start amazon-cloudwatch-agent
 sudo systemctl status amazon-cloudwatch-agent
 
-echo "Configuring Cloud Watch Agent"
-sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl \
-    -a fetch-config \
-    -m ec2 \
-    -c file:/opt/cloudwatch-config.json \
-    -s
