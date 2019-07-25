@@ -60,7 +60,6 @@ sudo systemctl status amazon-cloudwatch-agent
 cd /opt
 sudo mkdir cloudwatch
 cat << EOF | sudo tee -a /opt/cloudwatch/cloudwatch-config.json
-
 {
     "agent": {
         "metrics_collection_interval": 10,
@@ -79,7 +78,18 @@ cat << EOF | sudo tee -a /opt/cloudwatch/cloudwatch-config.json
             }
         },
         "log_stream_name": "cloudwatch_log_stream"
+    },
+    "metrics":{
+        "namespace":"csye6225-metrics",
+        "metrics_collected":{
+		     "statsd":{
+		        "service_address":":8125",
+		        "metrics_collection_interval":10,
+		        "metrics_aggregation_interval":10
+		     }
+	     }
     }
+	
 }
 EOF
 cd /home/centos
