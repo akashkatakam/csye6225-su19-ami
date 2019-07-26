@@ -49,40 +49,36 @@ sudo ./install auto
 # If code deploy aget is not running then start the service first
 # sudo service codedeploy-agent start
 sudo service codedeploy-agent status
-echo "Installing Unified Cloud Watch Agent"
 wget https://s3.us-east-1.amazonaws.com/amazoncloudwatch-agent-us-east-1/centos/amd64/latest/amazon-cloudwatch-agent.rpm
 sudo rpm -U ./amazon-cloudwatch-agent.rpm
-sudo systemctl status amazon-cloudwatch-agent
-sudo systemctl start amazon-cloudwatch-agent
-sudo systemctl status amazon-cloudwatch-agent
 cd /opt
 sudo mkdir cloudwatch
 cat << EOF | sudo tee -a /opt/cloudwatch/cloudwatch-config.json
 {
-  \"agent\": {
-    \"metrics_collection_interval\": 10,
-    \"logfile\": \"/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log\"
+  "agent": {
+    "metrics_collection_interval": 10,
+    "logfile": "/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log"
   },
-  \"logs\": {
-    \"logs_collected\": {
-      \"files\": {
-        \"collect_list\": [
+  "logs": {
+    "logs_collected": {
+      "files": {
+        "collect_list": [
           {
-            \"file_path\": \"/opt/tomcat/logs/csye6225.log\",
-            \"log_group_name\": \"csye6225_su2019\",
-            \"log_stream_name\": \"webapp\"
+            "file_path": "/opt/tomcat/logs/csye6225.log",
+            "log_group_name": "csye6225_su2019",
+            "log_stream_name": "webapp"
           }
         ]
       }
     },
-    \"log_stream_name\": \"cloudwatch_log_stream\"
+    "log_stream_name": "cloudwatch_log_stream"
   },
-  \"metrics\":{
-    \"metrics_collected\":{
-      \"statsd\":{
-        \"service_address\":\":8125\",
-        \"metrics_collection_interval\":10,
-        \"metrics_aggregation_interval\":0
+  "metrics":{
+    "metrics_collected":{
+      "statsd":{
+        "service_address":":8125",
+        "metrics_collection_interval":10,
+        "metrics_aggregation_interval":0
       }
     }
   }
