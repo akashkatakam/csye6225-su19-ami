@@ -55,24 +55,35 @@ cd /opt
 sudo mkdir cloudwatch
 cat << EOF | sudo tee -a /opt/cloudwatch/cloudwatch-config.json
 {
-    "agent": {
-        "metrics_collection_interval": 10,
-        "logfile": "/var/logs/amazon-cloudwatch-agent.log"
+  \"agent\": {
+    \"metrics_collection_interval\": 10,
+    \"logfile\": \"/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log\"
+  },
+  \"logs\": {
+    \"logs_collected\": {
+      \"files\": {
+        \"collect_list\": [
+          {
+            \"file_path\": \"/opt/tomcat/logs/csye6225.log\",
+            \"log_group_name\": \"csye6225_su2019\",
+            \"log_stream_name\": \"webapp\"
+          }
+        ]
+      }
     },
-    "logs": {
-        "logs_collected": {
-            "files": {
-                "collect_list": [
-                    {
-                        "file_path": "/opt/tomcat/logs/csye6225.log",
-                        "log_group_name": "csye6225_su2019",
-                        "log_stream_name": "webapp",
-                    }
-                ]
-            }
-        },
-        "log_stream_name": "cloudwatch_log_stream"
+    \"log_stream_name\": \"cloudwatch_log_stream\"
+  },
+  \"metrics\":{
+    \"metrics_collected\":{
+      \"statsd\":{
+        \"service_address\":\":8125\",
+        \"metrics_collection_interval\":10,
+        \"metrics_aggregation_interval\":0
+      }
     }
+  }
 }
 EOF
 cd /home/centos
+sudo systemctl enable amazon-cloudwatch-agent
+sudo systemctl start amazon-cloudwatch-agent
