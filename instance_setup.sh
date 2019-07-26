@@ -93,3 +93,4 @@ cat << EOF | sudo tee -a /opt/cloudwatch/cloudwatch-config.json
 }
 EOF
 cd /home/centos
+
